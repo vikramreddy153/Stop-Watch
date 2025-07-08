@@ -1,20 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Stopwatch App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>⏱ Stopwatch</h1>
-        <div id="display">00:00:00</div>
-        <div class="buttons">
-            <button onclick="startStop()">Start</button>
-            <button onclick="reset()">Reset</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Clock App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="top-bar">
+        <h1>🕰️ Clock App</h1>
+        <button id="themeToggle" onclick="toggleTheme()">🌙</button>
+      </div>
+
+      <div class="screen-container">
+        <div id="clockScreen" class="screen active">
+        <h2>🕒 Live Clock</h2>
+        <div id="liveClock">--:--:--</div>
+        <div class="analog-clock">
+          <div class="hand hour" id="hourHand"></div>
+          <div class="hand minute" id="minuteHand"></div>
+          <div class="hand second" id="secondHand"></div>
+          <div class="center-dot"></div>
+          <div id="clockNumbers"></div>
+          <div id="clockDate"></div>
         </div>
+      </div>
+
+      <!-- Stopwatch Screen -->
+      <div id="stopwatchScreen" class="screen">
+        <h2>⏱ Stopwatch</h2>
+        <div id="stopwatchDisplay">00:00:00</div>
+        <div class="buttons">
+          <button onclick="startStopwatch()">Start</button>
+          <button onclick="resetStopwatch()">Reset</button>
+        </div>
+      </div>
+
+      <!-- Alarm Screen -->
+      <!-- Alarm Screen -->
+      <div id="alarmScreen" class="screen">
+        <h2>⏰ Alarms</h2>
+
+        <div class="alarm-form">
+          <div class="input-group">
+            <label
+              ><span>📝</span>
+              <input type="text" id="alarmLabel" placeholder="Alarm Name"
+            /></label>
+          </div>
+          <div class="input-group">
+            <label><span>⏰</span> <input type="time" id="alarmTime" /></label>
+          </div>
+          <div class="input-group">
+            <label
+              ><span>🎵</span>
+              <input type="file" id="alarmAudio" accept="audio/*"
+            /></label>
+          </div>
+          <div class="input-group checkbox">
+            <label
+              ><input type="checkbox" id="repeatAlarm" /> Repeat Daily</label
+            >
+          </div>
+
+          <div class="buttons">
+            <button onclick="addAlarm()">➕ Add</button>
+            <button onclick="clearAllAlarms()">🧹 Clear All</button>
+            <button onclick="stopCurrentAlarm()">⏹ Stop</button>
+            <button onclick="snoozeAlarm()">😴 Snooze</button>
+          </div>
+        </div>
+
+        <ul id="alarmList" class="alarm-list"></ul>
+      </div>
+      </div>
+
+      <div class="bottom-nav">
+        <button
+          class="nav-btn active"
+          onclick="switchScreen('clockScreen', this)"
+        >
+          Clock
+        </button>
+        <button class="nav-btn" onclick="switchScreen('stopwatchScreen', this)">
+          Stopwatch
+        </button>
+        <button class="nav-btn" onclick="switchScreen('alarmScreen', this)">
+          Alarm
+        </button>
+      </div>
     </div>
 
+    <audio
+      id="defaultBeep"
+      src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
+    ></audio>
+    <audio
+      id="tickSound"
+      src="https://actions.google.com/sounds/v1/foley/clock_tick.ogg"
+    ></audio>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
